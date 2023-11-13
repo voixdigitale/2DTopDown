@@ -7,10 +7,17 @@ using UnityEngine;
 
 public class PlayerStateMachine : MonoBehaviour
 {
+    [SerializeField] private GameObject _playerModel;
     [SerializeField] private float _rollDuration = .3f;
+    [SerializeField] private float _runSpeed = 1f;
+    [SerializeField] private float _sprintSpeed = 2f;
+    [SerializeField] private float _rollSpeed = 3f;
     
     private PlayerState _currentState;
     private Animator _animator;
+    private Rigidbody2D _rb2d;
+    private float _currentSpeed = 0;
+    private Vector2 _direction = new Vector2();
 
     private int H_MoveSpeedX = Animator.StringToHash("MoveSpeedX");
     private int H_MoveSpeedY = Animator.StringToHash("MoveSpeedY");
@@ -21,12 +28,13 @@ public class PlayerStateMachine : MonoBehaviour
 
     void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = _playerModel.GetComponent<Animator>();
+        _rb2d = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
-        TransitionToState(PlayerState.Locomotion);
+        TransitionToState(PlayerState.Run);
     }
 
     void Update()
@@ -34,27 +42,34 @@ public class PlayerStateMachine : MonoBehaviour
         OnStateUpdate();
     }
 
+    private void FixedUpdate() {
+        _rb2d.velocity = _direction * _currentSpeed;
+    }
+
     private void OnStateEnter()
     {
         switch (_currentState)
         {
-            case PlayerState.Locomotion:
+            case PlayerState.Run:
+                _currentSpeed = _runSpeed;
                 break;
             case PlayerState.Sprint:
                 _animator.SetBool(H_IsSprinting, true);
+                _currentSpeed = _sprintSpeed;
                 break;
             case PlayerState.Roll:
                 _animator.SetBool(H_IsRolling, true);
+                _currentSpeed = _rollSpeed;
                 _endRollTime = Time.time + _rollDuration;
                 break;
         }
     }
 
     private void OnStateUpdate() {
+
         switch (_currentState) {
-            case PlayerState.Locomotion:
-                _animator.SetFloat(H_MoveSpeedX, Input.GetAxis("Horizontal"));
-                _animator.SetFloat(H_MoveSpeedY, Input.GetAxis("Vertical"));
+            case PlayerState.Run:
+                SetDirection();
 
                 if (Input.GetButtonDown("Fire3"))
                 {
@@ -62,11 +77,11 @@ public class PlayerStateMachine : MonoBehaviour
                 }
                 break;
             case PlayerState.Sprint:
-                _animator.SetFloat(H_MoveSpeedX, Input.GetAxis("Horizontal"));
-                _animator.SetFloat(H_MoveSpeedY, Input.GetAxis("Vertical"));
+                SetDirection();
+
                 if (Input.GetButtonUp("Fire3"))
                 {
-                    TransitionToState(PlayerState.Locomotion);
+                    TransitionToState(PlayerState.Run);
                 }
                 break;
             case PlayerState.Roll:
@@ -78,7 +93,7 @@ public class PlayerStateMachine : MonoBehaviour
                     }
                     else
                     {
-                        TransitionToState(PlayerState.Locomotion);
+                        TransitionToState(PlayerState.Run);
                     }
                 }
                 break;
@@ -87,7 +102,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnStateExit() {
         switch (_currentState) {
-            case PlayerState.Locomotion:
+            case PlayerState.Run:
                 break;
             case PlayerState.Sprint:
                 _animator.SetBool(H_IsSprinting, false);
@@ -104,11 +119,19 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = state;
         OnStateEnter();
     }
+
+    private void SetDirection() {
+        _direction.x = Input.GetAxis("Horizontal");
+        _direction.y = Input.GetAxis("Vertical");
+
+        _animator.SetFloat(H_MoveSpeedX, _direction.x);
+        _animator.SetFloat(H_MoveSpeedY, _direction.y);
+    }
 }
 
 
 public enum PlayerState {
-    Locomotion,
+    Run,
     Sprint,
     Roll
 }
