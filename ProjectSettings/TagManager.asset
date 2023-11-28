@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Splat
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Fairy
   - Background
   - Decorations
-  - 
+  - Treasure
   - 
   - 
   - 
@@ -41,6 +42,9 @@ TagManager:
   - name: Green Background
     uniqueID: 2049432635
     locked: 0
+  - name: Treasure
+    uniqueID: 299219721
+    locked: 0
   - name: Dry Background
     uniqueID: 1686832321
     locked: 0
@@ -49,4 +53,7 @@ TagManager:
     locked: 0
   - name: Decorations
     uniqueID: 1632131649
+    locked: 0
+  - name: UI
+    uniqueID: 3397653
     locked: 0
