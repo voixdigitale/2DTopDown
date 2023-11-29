@@ -120,8 +120,12 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     private void SetDirection() {
-        _direction.x = Input.GetAxis("Horizontal");
-        _direction.y = Input.GetAxis("Vertical");
+        if (!GameManager.instance.IsGameOver) {
+            _direction.x = Input.GetAxis("Horizontal");
+            _direction.y = Input.GetAxis("Vertical");
+        } else {
+            _direction = Vector2.zero;
+        }
 
         _animator.SetFloat(H_MoveSpeedX, _direction.x);
         _animator.SetFloat(H_MoveSpeedY, _direction.y);

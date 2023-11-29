@@ -228,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 30588878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.672462, y: 0.087495506, z: -10.006363}
+  m_LocalPosition: {x: 16.662462, y: 0.037495494, z: -10.006363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -569,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a88ca2c92fca3943b4e399981167404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsGameOver: 0
   _pressKeyPanel: {fileID: 2011482322}
   _gameOverPanel: {fileID: 7574375}
   _victoryPanel: {fileID: 1861111782}
@@ -584,6 +585,8 @@ MonoBehaviour:
   - {x: -19, y: -5}
   - {x: -13, y: -9}
   - {x: -24, y: 4}
+  _player: {fileID: 1952606717}
+  _fairy: {fileID: 229451589}
 --- !u!4 &158278389
 Transform:
   m_ObjectHideFlags: 0
@@ -989,7 +992,7 @@ Transform:
   m_GameObject: {fileID: 229451586}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.38, y: -2.4, z: 0}
+  m_LocalPosition: {x: -6, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1479,7 +1482,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.672462, y: 0.087495506, z: -10.006363}
+  m_LocalPosition: {x: 16.662462, y: 0.037495494, z: -10.006363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24849,7 +24852,7 @@ Transform:
   m_GameObject: {fileID: 1952606716}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.99, y: 0.55, z: 0}
+  m_LocalPosition: {x: -4, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25080,7 +25083,6 @@ GameObject:
   - component: {fileID: 1998953096}
   - component: {fileID: 1998953099}
   - component: {fileID: 1998953098}
-  - component: {fileID: 1998953097}
   m_Layer: 5
   m_Name: Congratulations
   m_TagString: Untagged
@@ -25107,21 +25109,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1280, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1998953097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998953095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5ec63a08c9400341834f573d9ac0834, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _color1: {r: 1, g: 1, b: 1, a: 1}
-  _color2: {r: 0.026666403, g: 1, b: 0, a: 1}
-  _interval: 0.2
 --- !u!114 &1998953098
 MonoBehaviour:
   m_ObjectHideFlags: 0
